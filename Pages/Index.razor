@@ -1,7 +1,48 @@
 ﻿@page "/"
+@using BlazorTodo.Models
 
-<h1>Hello, world!</h1>
+<div class="container">
+    <h1 class="pb-2">Todo</h1>
+    <div class="search">
+        <input type="text" @bind='inputTodo'>
+        <button @onclick="addList" class="btn btn-success btn-sm">Add to List</button>
+    </div>
+    <div class="list">
+        @for (int i = 0; i < todoList.Count; i++)
+        {
+            var index = i;
+            var item = todoList[i];
 
-Welcome to your new app.
+           <div class="list-item d-flex"> 
+               <p 
+               class="@(item.isComplete ? "todo-item-complete" : "todo-item-text")"
+                @onclick="(() => markComplete(item))"
+               >@item.Title</p>
+               <span @onclick="(() => removeItem(index))">&times;</span>
+            </div>
+           
+        }
+    </div>
+</div>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@code {
+    public string inputTodo { get; set; }
+    public List<Todo> todoList = new List<Todo>();
+
+    public void addList(){
+
+        var item = new Todo();
+        item.Title = inputTodo;
+        todoList.Add(item);
+        inputTodo = "";
+    }
+
+    public void removeItem(int index) {
+        todoList.RemoveAt(index);
+    }
+
+    public void markComplete(Todo todo){
+        todo.isComplete = !todo.isComplete;
+    }
+
+}
