@@ -98,25 +98,36 @@ using BlazorTodo.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\saim.ankarali\Desktop\zzz\Blazor\BlazorTodo\Pages\Index.razor"
+#line 31 "C:\Users\saim.ankarali\Desktop\zzz\Blazor\BlazorTodo\Pages\Index.razor"
        
-    public string inputTodo { get; set; }
+    public string inputTodo { get; set; } = "";
+    public string error { get; set; }
     public List<Todo> todoList = new List<Todo>();
 
     public void addList(){
 
         var item = new Todo();
         item.Title = inputTodo;
-        todoList.Add(item);
-        inputTodo = "";
+        if(inputTodo.Length != 0){
+            todoList.Add(item);
+            inputTodo = "";
+        }
+
+        if(item.Title == ""){
+            error = "You should write something!";
+        }else{
+            error = "";
+        }
     }
 
     public void removeItem(int index) {
         todoList.RemoveAt(index);
+        error = "";
     }
 
     public void markComplete(Todo todo){
         todo.isComplete = !todo.isComplete;
+        error = "";
     }
 
 
