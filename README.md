@@ -10,4 +10,4 @@ npm install
 dotnet run
 ```
 
-![blazortodogif](https://user-images.githubusercontent.com/34417875/135132914-0e490b92-f71e-4517-9d36-374613072151.gif)
+![blazortodoappgif](https://user-images.githubusercontent.com/34417875/135133107-f0a597d4-29d1-4805-ad76-7d1c576bf0df.gif)
