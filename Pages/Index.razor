@@ -1,14 +1,14 @@
 ﻿@page "/"
 @using BlazorTodo.Models
 
-<div class="container">
-    <h1 class="pb-2">Todo</h1>
-    <div class="search">
-        <input type="text" @bind='inputTodo'>
-        <button @onclick="addList" class="btn btn-success btn-sm">Add to List</button>
+<div class="container p-4">
+    <h1 class="pb-2 text-lg">Todo</h1>
+    <div class="search mb-2">
+        <input type="text" @bind='inputTodo' class="border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        <button @onclick="addList" class="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded">Add to List</button>
     </div>
     <div class="error">
-        <p class="text-danger">@error</p>
+        <p class="text-red-500 mb-2">@error</p>
     </div>
     <div class="list">
         @for (int i = 0; i < todoList.Count; i++)
@@ -16,12 +16,12 @@
             var index = i;
             var item = todoList[i];
 
-           <div class="list-item d-flex"> 
+           <div class="item flex justify-between w-44"> 
                <p 
-               class="@(item.isComplete ? "todo-item-complete" : "todo-item-text")"
+               class="overflow-hidden break-words cursor-pointer @(item.isComplete ? "line-through text-gray-300" : "text-gray-900")"
                 @onclick="(() => markComplete(item))"
                >@item.Title</p>
-               <span @onclick="(() => removeItem(index))">&times;</span>
+               <span class="text-red-600 cursor-pointer" @onclick="(() => removeItem(index))">&times;</span>
             </div>
            
         }
